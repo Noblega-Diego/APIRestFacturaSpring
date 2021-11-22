@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Facturas</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+
+  <body>
+      <table>
+          <thead>
+              <tr>
+                  <th>Fecha Comprobante</th>
+                  <th>Numero Comprobante</th>
+                  <th>Monto Total</th>
+                  <th>Detalle</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr th:each="fac : ${facturas}">
+                  <td th:text="${fac.fechaComprobante}"></td>
+                  <td th:text="${fac.nroComprobante}"></td>
+                  <td th:text="${fac.montoTotal}"></td>
+                  <td>
+                      <a href="detallefactura.html" 
+                         th:href="@{factura/}+${fac.id}"
+                         th:text="detalle"></a>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </body>
+
+</html>

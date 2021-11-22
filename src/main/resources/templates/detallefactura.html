@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Detalle de facturas</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  
+  <body>
+      <div>
+          <p>Fecha Comprobante: <span th:text="${factura.fechaComprobante}"></span></p>
+          <p>Numero: <span th:text="${factura.nroComprobante}"></span></p>
+          <p>Letra: <span th:text="${factura.letraComprobante}"></span></p>
+          <p>Tipo: <span th:text="${factura.tipoComprobante}"></span></p>
+          <p>Items de la factura</p>
+          <table>
+              <thead>
+                  <tr>
+                      <th>Articulo</th>
+                      <th>Cantidad</th>
+                      <th>Importe</th>
+                      <th>Descuento</th>
+                      <th>Subtotal</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr th:each="item : ${factura.detalles}" th:object="${item}">
+                      <td th:text="*{denominacionArticulo}"></td>
+                      <td th:text="*{cantidad}"></td>
+                      <td th:text="*{importe}"></td>
+                      <td th:text="*{descuento}"></td>
+                      <td th:text="${item.importe * item.cantidad - item.importe * item.cantidad * item.descuento / 100}"></td>
+                  </tr>
+              </tbody>
+          </table>
+          <p>Total: <span th:text="${factura.montoTotal}"></span></p>
+      </div>
+  </body>
+
+</html>
